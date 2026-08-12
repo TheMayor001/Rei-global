@@ -124,10 +124,16 @@ img {
 }
 
 .logo {
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-size: 1.2rem;
-  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo img {
+  width: auto;
+  height: 74px;
+  display: block;
+  object-fit: contain;
 }
 
 .nav-links {
@@ -998,6 +1004,13 @@ input:focus, textarea:focus {
   .footer {
     padding: 56px 0 104px;
   }
+  .footer-brand img {
+  width: auto;
+  height: 25px;
+  display: block;
+  object-fit: contain;
+  margin-bottom: 16px;
+}
 
   .footer-grid,
   .footer-bottom,
