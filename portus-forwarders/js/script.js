@@ -129,6 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
           const counter = entry.target;
+
           const target = parseInt(
             counter.getAttribute("data-target"),
             10
@@ -148,9 +149,9 @@ document.addEventListener("DOMContentLoaded", () => {
               1
             );
 
-            const value = Math.floor(progress * target);
-
-            counter.textContent = value;
+            counter.textContent = Math.floor(
+              progress * target
+            );
 
             if (progress < 1) {
               requestAnimationFrame(updateCounter);
@@ -192,9 +193,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       circle.style.width = `${diameter}px`;
       circle.style.height = `${diameter}px`;
+
       circle.style.left = `${
         e.clientX - rect.left - radius
       }px`;
+
       circle.style.top = `${
         e.clientY - rect.top - radius
       }px`;
@@ -213,46 +216,94 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // --------------------------------------------------------
-  // Contact form validation
+  // Contact form
   // --------------------------------------------------------
 
   const contactForm = document.getElementById("contactForm");
 
   if (contactForm) {
-    contactForm.addEventListener("submit", (e) => {
+    contactForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
       const name = document.getElementById("name");
       const email = document.getElementById("email");
       const phone = document.getElementById("phone");
       const message = document.getElementById("message");
-
-      const fields = [
-        name,
-        email,
-        phone,
-        message,
-      ];
-
-      const hasEmptyField = fields.some(
-        (field) => !field || !field.value.trim()
+      const submitButton = contactForm.querySelector(
+        'button[type="submit"]'
       );
 
-      if (hasEmptyField) {
-        e.preventDefault();
-
+      // Validate fields
+      if (
+        !name.value.trim() ||
+        !email.value.trim() ||
+        !phone.value.trim() ||
+        !message.value.trim()
+      ) {
         alert(
           "Please fill in all fields before submitting."
         );
-
         return;
       }
 
-      // IMPORTANT:
-      // Do not call e.preventDefault() here.
-      //
-      // When validation passes, the browser must be
-      // allowed to submit the form normally to:
-      //
-      // send-email.php
+      // Prevent duplicate submissions
+      const originalButtonText = submitButton
+        ? submitButton.textContent
+        : "";
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending...";
+      }
+
+      try {
+        const formData = new FormData(contactForm);
+
+        const response = await fetch(
+          contactForm.getAttribute("action") || "send-email.php",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+
+        let result;
+
+        try {
+          result = await response.json();
+        } catch (jsonError) {
+          throw new Error(
+            "The server returned an unexpected response."
+          );
+        }
+
+        if (response.ok && result.success) {
+          alert(
+            "Thank you. Your message has been sent successfully. We will get back to you shortly."
+          );
+
+          contactForm.reset();
+        } else {
+          alert(
+            result.message ||
+              "We were unable to send your message. Please try again later."
+          );
+        }
+      } catch (error) {
+        console.error(
+          "Contact form submission error:",
+          error
+        );
+
+        alert(
+          "We could not send your message right now. Please check your internet connection and try again later."
+        );
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+        }
+      }
     });
   }
 });
