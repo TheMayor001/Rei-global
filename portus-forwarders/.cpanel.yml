@@ -1,0 +1,21 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/sophonte/portusforwarders.com/
+    - /bin/cp -R 404.html $DEPLOYPATH
+    - /bin/cp -R Assets $DEPLOYPATH
+    - /bin/cp -R blog.html $DEPLOYPATH
+    - /bin/cp -R cloud-benefits.html $DEPLOYPATH
+    - /bin/cp -R custom-software-advantage.html $DEPLOYPATH
+    - /bin/cp -R data $DEPLOYPATH
+    - /bin/cp -R favicon.png $DEPLOYPATH
+    - /bin/cp -R index.css $DEPLOYPATH
+    - /bin/cp -R index.html $DEPLOYPATH
+    - /bin/cp -R pricing.html $DEPLOYPATH
+    - /bin/cp -R quote.html $DEPLOYPATH
+    - /bin/cp -R robots.txt $DEPLOYPATH
+    - /bin/cp -R script.js $DEPLOYPATH
+    - /bin/cp -R security-mistakes-2025.html $DEPLOYPATH
+    - /bin/cp -R sitemap.xml $DEPLOYPATH
+    - /bin/cp -R sophon_logo_web.png $DEPLOYPATH
+    - /bin/cp -R vision.jpg $DEPLOYPATH
