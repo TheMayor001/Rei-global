@@ -7,11 +7,11 @@ deployment:
     - /bin/mkdir -p $DEPLOYPATH/css
     - /bin/mkdir -p $DEPLOYPATH/images
     - /bin/mkdir -p $DEPLOYPATH/js
-    - /bin/cp -R assets/. $DEPLOYPATH/assets/
-    - /bin/cp -R css/. $DEPLOYPATH/css/
-    - /bin/cp -R images/. $DEPLOYPATH/images/
-    - /bin/cp -R js/. $DEPLOYPATH/js/
-    - /bin/cp about.html $DEPLOYPATH
-    - /bin/cp contact.html $DEPLOYPATH
-    - /bin/cp index.html $DEPLOYPATH
-    - /bin/cp services.html $DEPLOYPATH
+    - /bin/cp -R portus-forwarders/assets/. $DEPLOYPATH/assets/
+    - /bin/cp -R portus-forwarders/css/. $DEPLOYPATH/css/
+    - /bin/cp -R portus-forwarders/images/. $DEPLOYPATH/images/
+    - /bin/cp -R portus-forwarders/js/. $DEPLOYPATH/js/
+    - /bin/cp portus-forwarders/about.html $DEPLOYPATH
+    - /bin/cp portus-forwarders/contact.html $DEPLOYPATH
+    - /bin/cp portus-forwarders/index.html $DEPLOYPATH
+    - /bin/cp portus-forwarders/services.html $DEPLOYPATH
