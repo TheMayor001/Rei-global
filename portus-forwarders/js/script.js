@@ -123,8 +123,9 @@ buttons.forEach((btn) => {
   });
 });
 
-// Basic contact form validation
+// Contact form validation
 const contactForm = document.getElementById("contactForm");
+
 if (contactForm) {
   contactForm.addEventListener("submit", (e) => {
     const name = document.getElementById("name");
@@ -132,14 +133,17 @@ if (contactForm) {
     const phone = document.getElementById("phone");
     const message = document.getElementById("message");
 
-    if (!name.value.trim() || !email.value.trim() || !phone.value.trim() || !message.value.trim()) {
+    if (
+      !name.value.trim() ||
+      !email.value.trim() ||
+      !phone.value.trim() ||
+      !message.value.trim()
+    ) {
       e.preventDefault();
       alert("Please fill in all fields before submitting.");
-      return;
     }
 
-    alert("Thank you! Your message has been sent.");
-    contactForm.reset();
-    e.preventDefault();
+    // If everything is valid, do nothing.
+    // The browser will submit normally to send-email.php.
   });
 }
